@@ -40,6 +40,7 @@ public class Calculator extends javax.swing.JFrame {
         power = new javax.swing.JButton();
         evaluate = new javax.swing.JButton();
         clear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,6 +173,13 @@ public class Calculator extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,8 +224,13 @@ public class Calculator extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(evaluate)
                                     .addComponent(button2))
-                                .addGap(125, 125, 125)
-                                .addComponent(button3)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(125, 125, 125)
+                                        .addComponent(button3))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -252,7 +265,8 @@ public class Calculator extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(evaluate)
-                    .addComponent(clear))
+                    .addComponent(clear)
+                    .addComponent(jButton1))
                 .addGap(9, 9, 9))
         );
 
@@ -486,6 +500,10 @@ public class Calculator extends javax.swing.JFrame {
         TextPane.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TextPane.setText(TextPane.getText() + "0");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
     }
@@ -556,6 +574,7 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton closeParenthesis;
     private javax.swing.JButton divide;
     private javax.swing.JButton evaluate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton multiply;
     private javax.swing.JButton openParenthesis;
