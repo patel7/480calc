@@ -441,11 +441,14 @@ public class Calculator extends javax.swing.JFrame {
                 q.add(s.pop());
             }
             
+            /*
             LinkedList<String> copy = new LinkedList<String>(q);
             // Console output postfix for debugging
             while(!copy.isEmpty()) {
                 System.out.print(copy.remove() + " ");
             }
+            */
+            
             String num1;
             String num2;
             double n1,n2;
@@ -470,8 +473,6 @@ public class Calculator extends javax.swing.JFrame {
                     result = n1 / n2;
                 } else if(oprnd.equals("^")) {
                     result = Math.pow(n1, n2);
-                } else {
-                    System.out.println("OHNO");
                 }
                 s.push("" + result);
             }
