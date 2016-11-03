@@ -1,4 +1,5 @@
 package pkg480calculator;
+
 import java.util.*;
 import java.math.*;
 
@@ -310,10 +311,10 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_button9ActionPerformed
 
     private void multiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(")) {
             // no change
-        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
-            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+        } else if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
+            TextPane.setText(TextPane.getText().substring(0, TextPane.getText().length() - 1));
             TextPane.setText(TextPane.getText() + "*");
         } else {
             TextPane.setText(TextPane.getText() + "*");
@@ -321,10 +322,10 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_multiplyActionPerformed
 
     private void divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(")) {
             // no change
-        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
-            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+        } else if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
+            TextPane.setText(TextPane.getText().substring(0, TextPane.getText().length() - 1));
             TextPane.setText(TextPane.getText() + "/");
         } else {
             TextPane.setText(TextPane.getText() + "/");
@@ -332,10 +333,10 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_divideActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(")) {
             // no change
-        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
-            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+        } else if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
+            TextPane.setText(TextPane.getText().substring(0, TextPane.getText().length() - 1));
             TextPane.setText(TextPane.getText() + "+");
         } else {
             TextPane.setText(TextPane.getText() + "+");
@@ -343,10 +344,10 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_addActionPerformed
 
     private void subtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(")) {
             // no change
-        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
-            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+        } else if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
+            TextPane.setText(TextPane.getText().substring(0, TextPane.getText().length() - 1));
             TextPane.setText(TextPane.getText() + "-");
         } else {
             TextPane.setText(TextPane.getText() + "-");
@@ -354,10 +355,10 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_subtractActionPerformed
 
     private void powerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(")) {
             // no change
-        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
-            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+        } else if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
+            TextPane.setText(TextPane.getText().substring(0, TextPane.getText().length() - 1));
             TextPane.setText(TextPane.getText() + "^");
         } else {
             TextPane.setText(TextPane.getText() + "^");
@@ -369,7 +370,7 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_openParenthesisActionPerformed
 
     private void closeParenthesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeParenthesisActionPerformed
-        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(") || isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+        if (TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length() - 1).equals("(") || isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
             // no change
         } else {
             TextPane.setText(TextPane.getText() + ")");
@@ -379,97 +380,106 @@ public class Calculator extends javax.swing.JFrame {
     private void evaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluateActionPerformed
         // Test for ending with an operator or bad parentheses
         boolean valid = true;
-        if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+        if (isOperator(TextPane.getText().substring(TextPane.getText().length() - 1))) {
             valid = false;
         }
         int p = 0;
-        for(int i = 0; i < TextPane.getText().length(); i++) {
-            if(TextPane.getText().charAt(i) == '(') {
+        for (int i = 0; i < TextPane.getText().length(); i++) {
+            if (TextPane.getText().charAt(i) == '(') {
                 // add one for (
                 p++;
-            } else if(TextPane.getText().charAt(i) == ')') {
+            } else if (TextPane.getText().charAt(i) == ')') {
                 // subtract one for )
                 p--;
             }
-            if(p < 0) {
+            if (p < 0) {
                 // if ever goes negative, more closes than opens, error
                 valid = false;
                 break;
             }
         }
         // if total numbers don't line up, error
-        if(p != 0) {
+        if (p != 0) {
             valid = false;
         }
         
-        if(TextPane.getText().charAt(0) == 'S') {
+        boolean foundoperator = false;
+        for (int i = 0; i < TextPane.getText().length(); i++) {
+            if (isOperator(TextPane.getText().substring(i, i + 1)) || isParen(TextPane.getText().substring(i, i + 1))) {
+                foundoperator = true;
+            }
+        }
+        if(!foundoperator) {
             valid = false;
         }
         
-        if(valid) {
+        if (TextPane.getText().charAt(0) == 'S') {
+            valid = false;
+        }
+
+        if (valid) {
             Stack<String> s = new Stack<String>();
             Stack<String> e = new Stack<String>();
             LinkedList<String> q = new LinkedList<String>();
-            for(int i = 0; i < TextPane.getText().length(); i++) {
+            for (int i = 0; i < TextPane.getText().length(); i++) {
                 int j = 0;
-                while((i+j+1 <= TextPane.getText().length()) && !isOperator(TextPane.getText().substring(i+j,i+j+1)) && !isParen(TextPane.getText().substring(i+j,i+j+1)) && !isParen(TextPane.getText().substring(i+j,i+j+1))) {
+                while ((i + j + 1 <= TextPane.getText().length()) && !isOperator(TextPane.getText().substring(i + j, i + j + 1)) && !isParen(TextPane.getText().substring(i + j, i + j + 1)) && !isParen(TextPane.getText().substring(i + j, i + j + 1))) {
                     j++;
                 }
-                if(j > 0) {
+                if (j > 0) {
                     // If not the first number and after a closing paren, add a multiplication symbol
-                    if(i != 0 && TextPane.getText().substring(i-1,i).equals(")")) {
+                    if (i != 0 && TextPane.getText().substring(i - 1, i).equals(")")) {
                         s.push("*");
                     }
-                    q.add(TextPane.getText().substring(i,i+j));
-                    i=i+j-1;
-                } else if(TextPane.getText().substring(i,i+1).equals("(")) {
+                    q.add(TextPane.getText().substring(i, i + j));
+                    i = i + j - 1;
+                } else if (TextPane.getText().substring(i, i + 1).equals("(")) {
                     // If opening paren, just toss on stack
-                    if(i == 0) {
-                        
-                    } else if(s.isEmpty()) {
+                    if (i == 0) {
+
+                    } else if (s.isEmpty()) {
                         s.push("*");
-                    } else if(!isOperator(TextPane.getText().substring(i-1,i)) && !TextPane.getText().substring(i-1,i).equals("(")){
+                    } else if (!isOperator(TextPane.getText().substring(i - 1, i)) && !TextPane.getText().substring(i - 1, i).equals("(")) {
                         s.push("*");
                     }
-                    s.push(TextPane.getText().substring(i,i+1));
-                } else if(TextPane.getText().substring(i,i+1).equals(")")) {
+                    s.push(TextPane.getText().substring(i, i + 1));
+                } else if (TextPane.getText().substring(i, i + 1).equals(")")) {
                     // If closing paren, throw into queue until right before opening paren, then toss opening paren
-                    while(!s.isEmpty() && !(s.peek().equals("("))) {
+                    while (!s.isEmpty() && !(s.peek().equals("("))) {
                         q.add(s.pop());
                     }
                     s.pop();
-                } else if(isOperator(TextPane.getText().substring(i,i+1))) {
+                } else if (isOperator(TextPane.getText().substring(i, i + 1))) {
                     // If an operator, move stuff to extra stack while stuff on stack has higher precedence than current
-                    while(!s.isEmpty() && !isParen(s.peek()) && (precedence(s.peek()) > precedence(TextPane.getText().substring(i,i+1)))) {
+                    while (!s.isEmpty() && !isParen(s.peek()) && (precedence(s.peek()) > precedence(TextPane.getText().substring(i, i + 1)))) {
                         e.push(s.pop());
                     }
                     // Then push new operator
-                    s.push(TextPane.getText().substring(i,i+1));
+                    s.push(TextPane.getText().substring(i, i + 1));
                     // Then move things back to main stack
-                    while(!e.isEmpty()) {
+                    while (!e.isEmpty()) {
                         s.push(e.pop());
                     }
-                } 
+                }
             }
-            while(!s.isEmpty()) {
+            while (!s.isEmpty()) {
                 q.add(s.pop());
             }
-            
+
             /*
             LinkedList<String> copy = new LinkedList<String>(q);
             // Console output postfix for debugging
             while(!copy.isEmpty()) {
                 System.out.print(copy.remove() + " ");
             }
-            */
-            
+             */
             String num1;
             String num2;
-            double n1,n2;
+            double n1, n2;
             double result = 0;
             String oprnd;
-            while(!q.isEmpty()) {
-                while(!q.isEmpty() && !isOperator(q.peek()) && !isParen(q.peek())) {
+            while (!q.isEmpty()) {
+                while (!q.isEmpty() && !isOperator(q.peek()) && !isParen(q.peek())) {
                     s.push(q.remove());
                 }
                 oprnd = q.remove();
@@ -477,22 +487,26 @@ public class Calculator extends javax.swing.JFrame {
                 num1 = s.pop();
                 n1 = Double.parseDouble(num1);
                 n2 = Double.parseDouble(num2);
-                if(oprnd.equals("+")) {
+                if (oprnd.equals("+")) {
                     result = n1 + n2;
-                } else if(oprnd.equals("-")) {
+                } else if (oprnd.equals("-")) {
                     result = n1 - n2;
-                } else if(oprnd.equals("*")) {
+                } else if (oprnd.equals("*")) {
                     result = n1 * n2;
-                } else if(oprnd.equals("/")) {
+                } else if (oprnd.equals("/")) {
                     result = n1 / n2;
-                } else if(oprnd.equals("^")) {
+                } else if (oprnd.equals("^")) {
                     result = Math.pow(n1, n2);
                 }
                 s.push("" + result);
             }
             TextPane.setText(s.pop());
         } else {
-            TextPane.setText("SYNTAX ERROR");
+            if (!foundoperator) {
+                TextPane.setText(TextPane.getText());
+            } else {
+                TextPane.setText("SYNTAX ERROR");
+            }
         }
     }//GEN-LAST:event_evaluateActionPerformed
 
@@ -507,22 +521,22 @@ public class Calculator extends javax.swing.JFrame {
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
     }
-    
+
     private boolean isParen(String input) {
         return input.equals("(") || input.equals(")");
     }
-    
+
     // 3 for ^, 2 for * and /, 1 for + and -
     private int precedence(String input) {
-        if(input.equals("+") || input.equals("-")) {
+        if (input.equals("+") || input.equals("-")) {
             return 1;
-        } else if(input.equals("*") || input.equals("/")) {
+        } else if (input.equals("*") || input.equals("/")) {
             return 2;
         } else {
             return 3;
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
