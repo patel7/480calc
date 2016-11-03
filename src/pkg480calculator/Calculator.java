@@ -382,8 +382,44 @@ public class Calculator extends javax.swing.JFrame {
         
         if(valid) {
             Stack<String> s = new Stack<String>();
+            Stack<String> e = new Stack<String>();
+            LinkedList<String> q = new LinkedList<String>();
             for(int i = 0; i < TextPane.getText().length(); i++) {
-                
+                int j = 0;
+                while((i+j+1 <= TextPane.getText().length()) && !isOperator(TextPane.getText().substring(i+j,i+j+1)) && !isParen(TextPane.getText().substring(i+j,i+j+1)) && !isParen(TextPane.getText().substring(i+j,i+j+1))) {
+                    j++;
+                }
+                if(j > 0) {
+                    q.add(TextPane.getText().substring(i,i+j));
+                    i=i+j-1;
+                } else if(TextPane.getText().substring(i,i+1).equals("(")) {
+                    // If opening paren, just toss on stack
+                    s.push(TextPane.getText().substring(i,i+1));
+                } else if(TextPane.getText().substring(i,i+1).equals(")")) {
+                    // If closing paren, throw into queue until right before opening paren, then toss opening paren
+                    while(!s.isEmpty() && !(s.peek().equals("("))) {
+                        q.add(s.pop());
+                    }
+                    s.pop();
+                } else if(isOperator(TextPane.getText().substring(i,i+1))) {
+                    // If an operator, move stuff to extra stack while stuff on stack has higher precedence than current
+                    while(!s.isEmpty() && !isParen(s.peek()) && (precedence(s.peek()) > precedence(TextPane.getText().substring(i,i+1)))) {
+                        e.push(s.pop());
+                    }
+                    // Then push new operator
+                    s.push(TextPane.getText().substring(i,i+1));
+                    // Then move things back to main stack
+                    while(!e.isEmpty()) {
+                        s.push(e.pop());
+                    }
+                } 
+            }
+            while(!s.isEmpty()) {
+                q.add(s.pop());
+            }
+            // Console output postfix for debugging
+            while(!q.isEmpty()) {
+                System.out.print(q.remove() + " ");
             }
         } else {
             TextPane.setText("SYNTAX ERROR");
@@ -392,6 +428,21 @@ public class Calculator extends javax.swing.JFrame {
 
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
+    }
+    
+    private boolean isParen(String input) {
+        return input.equals("(") || input.equals(")");
+    }
+    
+    // 3 for ^, 2 for * and /, 1 for + and -
+    private int precedence(String input) {
+        if(input.equals("+") || input.equals("-")) {
+            return 1;
+        } else if(input.equals("*") || input.equals("/")) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
     
     /**
