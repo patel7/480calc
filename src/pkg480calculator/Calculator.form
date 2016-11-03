@@ -245,16 +245,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="("/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openParenthesisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="closeParenthesis">
       <Properties>
         <Property name="text" type="java.lang.String" value=")"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeParenthesisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="power">
       <Properties>
         <Property name="text" type="java.lang.String" value="^"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="powerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="evaluate">
       <Properties>

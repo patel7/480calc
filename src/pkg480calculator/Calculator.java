@@ -135,10 +135,25 @@ public class Calculator extends javax.swing.JFrame {
         });
 
         openParenthesis.setText("(");
+        openParenthesis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openParenthesisActionPerformed(evt);
+            }
+        });
 
         closeParenthesis.setText(")");
+        closeParenthesis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeParenthesisActionPerformed(evt);
+            }
+        });
 
         power.setText("^");
+        power.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                powerActionPerformed(evt);
+            }
+        });
 
         evaluate.setText("=");
 
@@ -263,21 +278,79 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_button9ActionPerformed
 
     private void multiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyActionPerformed
-        TextPane.setText(TextPane.getText() + "*");
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+            // no change
+        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+            TextPane.setText(TextPane.getText() + "*");
+        } else {
+            TextPane.setText(TextPane.getText() + "*");
+        }
     }//GEN-LAST:event_multiplyActionPerformed
 
     private void divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideActionPerformed
-        TextPane.setText(TextPane.getText() + "/");
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+            // no change
+        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+            TextPane.setText(TextPane.getText() + "/");
+        } else {
+            TextPane.setText(TextPane.getText() + "/");
+        }
     }//GEN-LAST:event_divideActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        TextPane.setText(TextPane.getText() + "+");
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+            // no change
+        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+            TextPane.setText(TextPane.getText() + "+");
+        } else {
+            TextPane.setText(TextPane.getText() + "+");
+        }
     }//GEN-LAST:event_addActionPerformed
 
     private void subtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractActionPerformed
-        TextPane.setText(TextPane.getText() + "-");
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+            // no change
+        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+            TextPane.setText(TextPane.getText() + "-");
+        } else {
+            TextPane.setText(TextPane.getText() + "-");
+        }
     }//GEN-LAST:event_subtractActionPerformed
 
+    private void powerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerActionPerformed
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(")) {
+            // no change
+        } else if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            TextPane.setText(TextPane.getText().substring(0,TextPane.getText().length()-1));
+            TextPane.setText(TextPane.getText() + "^");
+        } else {
+            TextPane.setText(TextPane.getText() + "^");
+        }
+    }//GEN-LAST:event_powerActionPerformed
+
+    private void openParenthesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openParenthesisActionPerformed
+        if(TextPane.getText().substring(TextPane.getText().length()-1).equals(")")) {
+            // no change
+        } else {
+            TextPane.setText(TextPane.getText() + "(");
+        }
+    }//GEN-LAST:event_openParenthesisActionPerformed
+
+    private void closeParenthesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeParenthesisActionPerformed
+        if(TextPane.getText().equals("") || TextPane.getText().substring(TextPane.getText().length()-1).equals("(") || isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            // no change
+        } else {
+            TextPane.setText(TextPane.getText() + ")");
+        }
+    }//GEN-LAST:event_closeParenthesisActionPerformed
+
+    private boolean isOperator(String input) {
+        return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
+    }
     
     /**
      * @param args the command line arguments
