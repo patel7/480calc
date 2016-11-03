@@ -40,7 +40,7 @@ public class Calculator extends javax.swing.JFrame {
         power = new javax.swing.JButton();
         evaluate = new javax.swing.JButton();
         clear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Button0 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,10 +173,10 @@ public class Calculator extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Button0.setText("0");
+        Button0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Button0ActionPerformed(evt);
             }
         });
 
@@ -230,7 +230,7 @@ public class Calculator extends javax.swing.JFrame {
                                         .addComponent(button3))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1)))))))
+                                        .addComponent(Button0)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -266,7 +266,7 @@ public class Calculator extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(evaluate)
                     .addComponent(clear)
-                    .addComponent(jButton1))
+                    .addComponent(Button0))
                 .addGap(9, 9, 9))
         );
 
@@ -500,9 +500,9 @@ public class Calculator extends javax.swing.JFrame {
         TextPane.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Button0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button0ActionPerformed
         TextPane.setText(TextPane.getText() + "0");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Button0ActionPerformed
 
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
@@ -559,6 +559,7 @@ public class Calculator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button0;
     private javax.swing.JTextPane TextPane;
     private javax.swing.JButton add;
     private javax.swing.JButton button1;
@@ -574,7 +575,6 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton closeParenthesis;
     private javax.swing.JButton divide;
     private javax.swing.JButton evaluate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton multiply;
     private javax.swing.JButton openParenthesis;
