@@ -1,4 +1,5 @@
 package pkg480calculator;
+import java.util.*;
 
 public class Calculator extends javax.swing.JFrame {
 
@@ -156,6 +157,11 @@ public class Calculator extends javax.swing.JFrame {
         });
 
         evaluate.setText("=");
+        evaluate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evaluateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,11 +339,7 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_powerActionPerformed
 
     private void openParenthesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openParenthesisActionPerformed
-        if(TextPane.getText().substring(TextPane.getText().length()-1).equals(")")) {
-            // no change
-        } else {
-            TextPane.setText(TextPane.getText() + "(");
-        }
+        TextPane.setText(TextPane.getText() + "(");
     }//GEN-LAST:event_openParenthesisActionPerformed
 
     private void closeParenthesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeParenthesisActionPerformed
@@ -347,6 +349,46 @@ public class Calculator extends javax.swing.JFrame {
             TextPane.setText(TextPane.getText() + ")");
         }
     }//GEN-LAST:event_closeParenthesisActionPerformed
+
+    private void evaluateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluateActionPerformed
+        // Test for ending with an operator or bad parentheses
+        boolean valid = true;
+        if(isOperator(TextPane.getText().substring(TextPane.getText().length()-1))) {
+            valid = false;
+        }
+        int p = 0;
+        for(int i = 0; i < TextPane.getText().length(); i++) {
+            if(TextPane.getText().charAt(i) == '(') {
+                // add one for (
+                p++;
+            } else if(TextPane.getText().charAt(i) == ')') {
+                // subtract one for )
+                p--;
+            }
+            if(p < 0) {
+                // if ever goes negative, more closes than opens, error
+                valid = false;
+                break;
+            }
+        }
+        // if total numbers don't line up, error
+        if(p != 0) {
+            valid = false;
+        }
+        
+        if(TextPane.getText().charAt(0) == 'S') {
+            valid = false;
+        }
+        
+        if(valid) {
+            Stack<String> s = new Stack<String>();
+            for(int i = 0; i < TextPane.getText().length(); i++) {
+                
+            }
+        } else {
+            TextPane.setText("SYNTAX ERROR");
+        }
+    }//GEN-LAST:event_evaluateActionPerformed
 
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
