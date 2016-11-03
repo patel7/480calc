@@ -1,5 +1,6 @@
 package pkg480calculator;
 import java.util.*;
+import java.math.*;
 
 public class Calculator extends javax.swing.JFrame {
 
@@ -38,6 +39,7 @@ public class Calculator extends javax.swing.JFrame {
         closeParenthesis = new javax.swing.JButton();
         power = new javax.swing.JButton();
         evaluate = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,6 +165,13 @@ public class Calculator extends javax.swing.JFrame {
             }
         });
 
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,7 +191,8 @@ public class Calculator extends javax.swing.JFrame {
                                 .addGap(46, 46, 46)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(openParenthesis)
-                                    .addComponent(divide))))
+                                    .addComponent(divide)))
+                            .addComponent(clear))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -240,7 +250,9 @@ public class Calculator extends javax.swing.JFrame {
                     .addComponent(button2)
                     .addComponent(button3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(evaluate)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(evaluate)
+                    .addComponent(clear))
                 .addGap(9, 9, 9))
         );
 
@@ -390,10 +402,21 @@ public class Calculator extends javax.swing.JFrame {
                     j++;
                 }
                 if(j > 0) {
+                    // If not the first number and after a closing paren, add a multiplication symbol
+                    if(i != 0 && TextPane.getText().substring(i-1,i).equals(")")) {
+                        s.push("*");
+                    }
                     q.add(TextPane.getText().substring(i,i+j));
                     i=i+j-1;
                 } else if(TextPane.getText().substring(i,i+1).equals("(")) {
                     // If opening paren, just toss on stack
+                    if(i == 0) {
+                        
+                    } else if(s.isEmpty()) {
+                        s.push("*");
+                    } else if(!isOperator(TextPane.getText().substring(i-1,i)) && !TextPane.getText().substring(i-1,i).equals("(")){
+                        s.push("*");
+                    }
                     s.push(TextPane.getText().substring(i,i+1));
                 } else if(TextPane.getText().substring(i,i+1).equals(")")) {
                     // If closing paren, throw into queue until right before opening paren, then toss opening paren
@@ -417,14 +440,50 @@ public class Calculator extends javax.swing.JFrame {
             while(!s.isEmpty()) {
                 q.add(s.pop());
             }
+            
+            LinkedList<String> copy = new LinkedList<String>(q);
             // Console output postfix for debugging
-            while(!q.isEmpty()) {
-                System.out.print(q.remove() + " ");
+            while(!copy.isEmpty()) {
+                System.out.print(copy.remove() + " ");
             }
+            String num1;
+            String num2;
+            int n1,n2;
+            int result = 0;
+            String oprnd;
+            while(!q.isEmpty()) {
+                while(!q.isEmpty() && !isOperator(q.peek()) && !isParen(q.peek())) {
+                    s.push(q.remove());
+                }
+                oprnd = q.remove();
+                num2 = s.pop();
+                num1 = s.pop();
+                n1 = Integer.parseInt(num1);
+                n2 = Integer.parseInt(num2);
+                if(oprnd.equals("+")) {
+                    result = n1 + n2;
+                } else if(oprnd.equals("-")) {
+                    result = n1 - n2;
+                } else if(oprnd.equals("*")) {
+                    result = n1 * n2;
+                } else if(oprnd.equals("/")) {
+                    result = n1 / n2;
+                } else if(oprnd.equals("^")) {
+                    // result = Math.pow(n1, n2);
+                } else {
+                    System.out.println("OHNO");
+                }
+                s.push("" + result);
+            }
+            TextPane.setText(s.pop());
         } else {
             TextPane.setText("SYNTAX ERROR");
         }
     }//GEN-LAST:event_evaluateActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        TextPane.setText("");
+    }//GEN-LAST:event_clearActionPerformed
 
     private boolean isOperator(String input) {
         return input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("^");
@@ -492,6 +551,7 @@ public class Calculator extends javax.swing.JFrame {
     private javax.swing.JButton button7;
     private javax.swing.JButton button8;
     private javax.swing.JButton button9;
+    private javax.swing.JButton clear;
     private javax.swing.JButton closeParenthesis;
     private javax.swing.JButton divide;
     private javax.swing.JButton evaluate;
