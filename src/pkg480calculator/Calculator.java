@@ -448,8 +448,8 @@ public class Calculator extends javax.swing.JFrame {
             }
             String num1;
             String num2;
-            int n1,n2;
-            int result = 0;
+            double n1,n2;
+            double result = 0;
             String oprnd;
             while(!q.isEmpty()) {
                 while(!q.isEmpty() && !isOperator(q.peek()) && !isParen(q.peek())) {
@@ -458,8 +458,8 @@ public class Calculator extends javax.swing.JFrame {
                 oprnd = q.remove();
                 num2 = s.pop();
                 num1 = s.pop();
-                n1 = Integer.parseInt(num1);
-                n2 = Integer.parseInt(num2);
+                n1 = Double.parseDouble(num1);
+                n2 = Double.parseDouble(num2);
                 if(oprnd.equals("+")) {
                     result = n1 + n2;
                 } else if(oprnd.equals("-")) {
@@ -469,7 +469,7 @@ public class Calculator extends javax.swing.JFrame {
                 } else if(oprnd.equals("/")) {
                     result = n1 / n2;
                 } else if(oprnd.equals("^")) {
-                    // result = Math.pow(n1, n2);
+                    result = Math.pow(n1, n2);
                 } else {
                     System.out.println("OHNO");
                 }
